@@ -2,6 +2,8 @@ package com.devspacecinenow
 
 import com.google.gson.annotations.SerializedName
 
+@kotlinx.serialization.Serializable
+
 data class MovieDto(
 
     val id: Int,
