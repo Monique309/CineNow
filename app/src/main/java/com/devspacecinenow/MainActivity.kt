@@ -1,5 +1,6 @@
 package com.devspacecinenow
 
+import android.graphics.Movie
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -47,6 +48,10 @@ class MainActivity : ComponentActivity() {
             CineNowTheme {
                 var nowPlayingMovies by remember { mutableStateOf<List<MovieDto>>(emptyList()) }
                 var getUpcomingMovies by remember { mutableStateOf<List<MovieDto>>(emptyList()) }
+                var getTopRatedMovies by remember { mutableStateOf<List<MovieDto>>(emptyList()) }
+                var getPopularMovies by remember { mutableStateOf<List<MovieDto>>(emptyList()) }
+
+
 
 
                 val apiService = RetrofitClient.retrofitInstance.create(ApiService::class.java)
@@ -96,6 +101,55 @@ class MainActivity : ComponentActivity() {
                     }
                 })
 
+                val callTopRatedMovies = apiService.getTopRatedMovies()
+                callTopRatedMovies.enqueue(object : Callback<MovieResponse>{
+                    override fun onResponse(
+                        call: Call<MovieResponse>,
+                        response: Response<MovieResponse>
+                    ) {
+                        if (response. isSuccessful){
+                            val movies = response.body()?.results
+                            if (movies != null) {
+                                getTopRatedMovies = movies
+                            }
+
+                        }else{
+                            Log.d("MainActivity", "Request Error :: ${response.errorBody()}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                        Log.d("MainActivity", "Network Error :: ${t.message}")
+                    }
+
+                })
+
+                val callPopularMovies = apiService.getPopularMovies()
+                callPopularMovies.enqueue(object : Callback<MovieResponse>{
+                    override fun onResponse(
+                        call: Call<MovieResponse>,
+                        response: Response<MovieResponse>
+                    ) {
+                        if (response.isSuccessful){
+                            val movies = response.body()?.results
+                            if(movies != null) {
+                                getPopularMovies = movies
+                            }
+
+                    }else{
+                            Log.d("MainActivity", "Request Error :: ${response.errorBody()}")
+
+                        }
+                        }
+
+
+                    override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                        Log.d("MainActivity", "Network Error :: ${t.message}")
+
+                    }
+
+                })
+
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -118,7 +172,7 @@ class MainActivity : ComponentActivity() {
                             )
 
                         MovieSession(
-                            label = "Upcoming",
+                            label = "Upcoming Movies",
                             movieList = getUpcomingMovies,
                             onClick = { movieClicked ->
 
@@ -131,6 +185,24 @@ class MainActivity : ComponentActivity() {
                         MovieSession(
                             label = "Now Playing",
                             movieList = nowPlayingMovies,
+                            onClick = { movieClicked ->
+
+                            }
+
+
+                        )
+
+                        MovieSession(
+                            label = "Top Rated Movies",
+                            movieList = getTopRatedMovies,
+                            onClick = { movieClicked ->
+
+                            }
+                        )
+
+                        MovieSession(
+                            label = "Popular Movies",
+                            movieList = getPopularMovies,
                             onClick = { movieClicked ->
 
                             }
