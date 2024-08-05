@@ -145,9 +145,8 @@ import retrofit2.Response
     getTopRatedMovies = getTopRatedMovies,
     getPopularMovies = getPopularMovies
 
-
-        ) {itemClicked ->
-        navController.navigate(route = "movieDetail")
+    ) {itemClicked ->
+        navController.navigate(route = "movieDetail/${itemClicked.id}")
 
     }
 }
