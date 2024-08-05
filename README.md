@@ -11,7 +11,7 @@ Intuitive Interface: Easy navigation and clean design for better user experience
 <img src="https://github.com/ComunidadeDevSpace/CineNow/assets/11612508/9690f66d-fb65-4cd7-82db-954473cb6c2d" width=260/> <img src="https://github.com/ComunidadeDevSpace/CineNow/assets/11612508/f8006a40-8855-4d6f-b9b9-a44a8c991fe1" width=260/>
 
 
-## Used Technologies
+## Technologies
 - 100% Kotlin
 - Compose
   - Column
