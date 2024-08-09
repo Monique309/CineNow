@@ -1,4 +1,4 @@
-package com.devspacecinenow
+package com.devspacecinenow.presentation
 
 import android.util.Log
 import androidx.compose.foundation.clickable
@@ -29,6 +29,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.devspacecinenow.ApiService
+import com.devspacecinenow.common.MovieDto
+import com.devspacecinenow.common.MovieResponse
+import com.devspacecinenow.common.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -141,9 +145,9 @@ import retrofit2.Response
     MovieListContent(
 
         getUpcomingMovies = getUpcomingMovies,
-    nowPlayingMovies = nowPlayingMovies,
-    getTopRatedMovies = getTopRatedMovies,
-    getPopularMovies = getPopularMovies
+        nowPlayingMovies = nowPlayingMovies,
+        getTopRatedMovies = getTopRatedMovies,
+        getPopularMovies = getPopularMovies
 
     ) {itemClicked ->
         navController.navigate(route = "movieDetail/${itemClicked.id}")
@@ -237,7 +241,7 @@ private fun MovieSession(
 
 
 @Composable
- private fun MovieList(
+private fun MovieList(
     movieList: List<MovieDto>,
     onClick: (MovieDto) -> Unit
 ) {

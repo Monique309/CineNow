@@ -1,4 +1,6 @@
-package com.devspacecinenow
+package com.devspacecinenow.common
+
+import com.devspacecinenow.common.MovieDto
 
 @kotlinx.serialization.Serializable
 

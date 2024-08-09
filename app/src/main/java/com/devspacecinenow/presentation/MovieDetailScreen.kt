@@ -1,4 +1,4 @@
-package com.devspacecinenow
+package com.devspacecinenow.presentation
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -25,6 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.devspacecinenow.ApiService
+import com.devspacecinenow.common.MovieDto
+import com.devspacecinenow.common.RetrofitClient
 import com.devspacecinenow.ui.theme.CineNowTheme
 import retrofit2.Call
 import retrofit2.Callback
@@ -88,27 +91,29 @@ import retrofit2.Response
         }
     }
 }
+
 @Composable
-private fun MovieDetailContent(movie : MovieDto) {
+private fun MovieDetailContent(movie: MovieDto) {
     Column(
         modifier = Modifier.fillMaxSize()
-    ){
+    ) {
         AsyncImage(
             modifier = Modifier
                 .height(200.dp)
                 .fillMaxSize(),
             contentScale = ContentScale.Crop,
-            model =movie.posterFullPath ,
-            contentDescription = "${movie.title} Poster image" )
+            model = movie.posterFullPath,
+            contentDescription = "${movie.title} Poster image"
+        )
 
         Text(
-            modifier = Modifier. padding(16.dp),
+            modifier = Modifier.padding(16.dp),
             text = movie.overview,
             fontSize = 16.sp
 
         )
     }
-    }
+}
 
 
 @Preview(showBackground = true)

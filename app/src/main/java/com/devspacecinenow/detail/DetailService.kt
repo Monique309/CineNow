@@ -1,0 +1,12 @@
+package com.devspacecinenow.detail
+
+import com.devspacecinenow.common.MovieDto
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Path
+
+interface DetailService {
+
+    @GET("{movie_id}?language=en-US")
+    fun getMovieById(@Path("movie_id")movieId: String): Call<MovieDto>
+}
